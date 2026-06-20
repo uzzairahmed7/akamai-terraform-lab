@@ -1,0 +1,61 @@
+{
+  "accountId": "act_B-V-3YSNQJN",
+  "contractId": "ctr_V-3YSNQK2",
+  "groupId": "grp_211815",
+  "propertyId": "prp_887852",
+  "propertyVersion": 3,
+  "etag": "2d889f7debede3b32527e4c6ba6422d9fa4e947e",
+  "ruleFormat": "v2022-10-18",
+  "comments": "Adding secrete key",
+  "rules": {
+    "name": "default",
+    "behaviors": [
+      {
+        "name": "origin",
+        "options": {
+          "cacheKeyHostname": "REQUEST_HOST_HEADER",
+          "compress": true,
+          "enableTrueClientIp": true,
+          "forwardHostHeader": "ORIGIN_HOSTNAME",
+          "hostname": "juiceshop.akaorigin.com",
+          "httpPort": 80,
+          "httpsPort": 443,
+          "originCertificate": "",
+          "originSni": true,
+          "originType": "CUSTOMER",
+          "ports": "",
+          "trueClientIpClientSetting": false,
+          "trueClientIpHeader": "True-Client-IP",
+          "verificationMode": "PLATFORM_SETTINGS"
+        }
+      },
+      {
+        "name": "cpCode",
+        "options": {
+          "value": {
+            "cpCodeLimits": null,
+            "createdDate": 1645649950000,
+            "description": "CP Code1",
+            "id": 1258515,
+            "name": "CP Code1",
+            "products": [
+              "SPM"
+            ]
+          }
+        }
+      }
+    ],
+    "children": [
+      "#include:Augment_insights.json",
+      "#include:Accelerate_delivery.json",
+      "#include:Offload_origin.json",
+      "#include:Strengthen_security.json",
+      "#include:Increase_availability.json",
+      "#include:Minimize_payload.json"
+    ],
+    "comments": "The Default Rule template contains all the necessary and recommended behaviors. Rules are evaluated from top to bottom and the last matching rule wins.",
+    "options": {
+      "is_secure": true
+    }
+  }
+}

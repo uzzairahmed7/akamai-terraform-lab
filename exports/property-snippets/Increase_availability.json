@@ -1,0 +1,115 @@
+{
+  "children": [
+    {
+      "behaviors": [
+        {
+          "name": "breakConnection",
+          "options": {
+            "enabled": true
+          }
+        }
+      ],
+      "comments": "Simulate an origin connection problem and test the site failover configuration on the CDN staging network.",
+      "criteria": [
+        {
+          "name": "contentDeliveryNetwork",
+          "options": {
+            "matchOperator": "IS",
+            "network": "STAGING"
+          }
+        },
+        {
+          "name": "requestHeader",
+          "options": {
+            "headerName": "breakconnection",
+            "matchCaseSensitiveValue": true,
+            "matchOperator": "IS_ONE_OF",
+            "matchWildcardName": false,
+            "matchWildcardValue": false,
+            "values": [
+              "secretkey",
+              "yGR6MZybvgxabhAMmTMt"
+            ]
+          }
+        }
+      ],
+      "name": "Simulate failover",
+      "options": {},
+      "criteriaMustSatisfy": "all"
+    },
+    {
+      "behaviors": [
+        {
+          "name": "failAction",
+          "options": {
+            "actionType": "RECREATED_NS",
+            "cpCode": {
+              "cpCodeLimits": null,
+              "createdDate": 1645649950000,
+              "description": "WAAP",
+              "id": 1258515,
+              "name": "WAAP",
+              "products": [
+                "SPM"
+              ]
+            },
+            "enabled": true,
+            "netStorageHostname": {
+              "cpCode": 1294090,
+              "downloadDomainName": "akamaiuniversity.download.akamai.com",
+              "g2oToken": null
+            },
+            "netStoragePath": "/failover/sorry_page.html",
+            "statusCode": 200
+          }
+        }
+      ],
+      "comments": "Specify how edge servers respond when the origin is not available.",
+      "criteria": [
+        {
+          "name": "originTimeout",
+          "options": {
+            "matchOperator": "ORIGIN_TIMED_OUT"
+          }
+        }
+      ],
+      "name": "Site failover",
+      "options": {},
+      "criteriaMustSatisfy": "any"
+    },
+    {
+      "behaviors": [
+        {
+          "name": "healthDetection",
+          "options": {
+            "maximumReconnects": 3,
+            "retryCount": 3,
+            "retryInterval": "60s"
+          }
+        }
+      ],
+      "comments": "Monitor the health of your origin by tracking unsuccessful IP connection attempts.",
+      "name": "Origin health",
+      "options": {},
+      "criteriaMustSatisfy": "all"
+    },
+    {
+      "behaviors": [
+        {
+          "name": "scriptManagement",
+          "options": {
+            "enabled": false
+          }
+        }
+      ],
+      "comments": "Enable Script Management to minimize performance and availability impacts from third-party JavaScripts.",
+      "name": "Script management",
+      "options": {},
+      "criteriaMustSatisfy": "all"
+    }
+  ],
+  "comments": "Control how to respond when your origin or third parties are slow or even down to minimize the negative impact on user experience.",
+  "name": "Increase availability",
+  "options": {},
+  "criteriaMustSatisfy": "all"
+}

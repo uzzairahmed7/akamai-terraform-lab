@@ -1,0 +1,23 @@
+# Terraform
+
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Terraform variables
+
+terraform.tfvars
+*.tfvars
+
+# Akamai credentials
+
+.edgerc
+
+# Logs
+
+crash.log
+
+# OS files
+
+Thumbs.db
+.DS_Store
